@@ -54,9 +54,29 @@ struct Node* delete_last_element(struct Node* head)
        temp->next=head;
        return head;
     }
-    
+
 }
 
+struct Node* reverse_CLL(struct Node* head)
+{
+    //initializing the three pointer
+    struct Node* prev=NULL;
+    struct Node* current=head;
+    struct Node* next=NULL;
+    while(current->next!=head)
+    {
+        next=current->next;
+        current->next=prev;
+        prev=current;
+        current=next;
+    }
+    //last node modification
+    current->next=prev;
+    head->next=current;
+    head=current;
+    return head;
+
+}
 
 
 int main()
@@ -69,7 +89,7 @@ int main()
     push_CLL(&head,1);
     push_CLL(&head,0);
     traversal_CLL(head);
-    head=delete_last_element(head);head=delete_last_element(head);
+    head=reverse_CLL(head);
     traversal_CLL(head);
 
     return 0;
